@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Star Way</string>
+    <string name="view_sky_text">обзор неба</string>
+    <string name="space">дальний космос</string>
+    <string name="news">НОВОСТИ</string>
+    <string name="news_end">бесконечность не предел</string>
+</resources>
