@@ -20,16 +20,15 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.inflater = LayoutInflater.from(context);
         this.news = news;
     }
+
     @Override
-    public int getItemViewType(int position)
-    {
-        if (position == 0||position>news.size())
-        {
+    public int getItemViewType(int position) {
+        if (position == 0) {
             return 0;
-        }
-        else
-        {
+        } else if (position > news.size()) {
             return 1;
+        } else {
+            return 2;
         }
     }
 
@@ -41,16 +40,19 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         //загружаем разметку в зависимости от типа и возвращаем
         //нужный холдер
-        switch (viewType)
-        {
-            case 1:
+        switch (viewType) {
+            case 2:
                 itemLayoutView = inflater.inflate(R.layout.card,
                         parent, false);
                 return new NewsHolder(itemLayoutView);
-            default:
+            case 0:
                 itemLayoutView = inflater.inflate(R.layout.text,
                         parent, false);
-                return new TextHolder(itemLayoutView);
+                return new FirstTextHolder(itemLayoutView);
+            default:
+                itemLayoutView = inflater.inflate(R.layout.second_text,
+                        parent, false);
+                return new SecondTextHolder(itemLayoutView);
 
         }
 
@@ -59,14 +61,15 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        if (position==0||position>news.size()){
-            TextHolder textHolder = (TextHolder) holder;
-            if (position==0)
+        if (position == 0) {
+            FirstTextHolder textHolder = (FirstTextHolder) holder;
             textHolder.title.setText(R.string.news);
-            else textHolder.title.setText(R.string.news_end);
-        }else {
+        } else if (position > news.size()) {
+            SecondTextHolder textHolder = (SecondTextHolder) holder;
+            textHolder.title.setText(R.string.news_end);
+        } else {
             NewsHolder newsHolder = (NewsHolder) holder;
-            News n = news.get(position-1);
+            News n = news.get(position - 1);
             newsHolder.title.setText(n.getText());
             newsHolder.image.setImageResource(n.imageId);
         }
@@ -75,7 +78,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return news.size()+2;
+        return news.size() + 2;
     }
 
 
@@ -91,14 +94,22 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     }
-    public static class TextHolder extends RecyclerView.ViewHolder {
+
+    public static class FirstTextHolder extends RecyclerView.ViewHolder {
         final TextView title;
 
-        TextHolder(View view) {
+        public FirstTextHolder(View view) {
             super(view);
             title = view.findViewById(R.id.someText);
         }
+    }
 
+    public static class SecondTextHolder extends RecyclerView.ViewHolder {
+        final TextView title;
 
+        public SecondTextHolder(View view) {
+            super(view);
+            title = view.findViewById(R.id.someText);
+        }
     }
 }

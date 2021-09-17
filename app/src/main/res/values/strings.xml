@@ -2,6 +2,35 @@
     <string name="app_name">Star Way</string>
     <string name="view_sky_text">обзор неба</string>
     <string name="space">дальний космос</string>
-    <string name="news">НОВОСТИ</string>
+    <string name="news">новости</string>
     <string name="news_end">бесконечность не предел</string>
+    <string-array name="spec">
+        <item>видим..</item>
+        <item>радио..</item>
+        <item>инфра..</item>
+        <item>ультра..</item>
+        <item>рент..</item>
+    </string-array>
+    <string name="settings">настройки</string>
+    <string name="search_settings">поиск настроек</string>
+    <string name="sky_watch">обзор неба</string>
+    <string name="units">единицы измерения</string>
+    <string name="gps">gps</string>
+    <string name="notifications">уведомления</string>
+    <string name="help">вопросы и помощь</string>
+    <string name="light_years">световые года</string>
+    <string name="parsecs">парсеки</string>
+    <string name="a_e">a.e.</string>
+    <string name="current_gps">текущее местоположение</string>
+    <string name="lat">широта</string>
+    <string name="lon">долгота</string>
+    <string name="lat_hint">41°16’59”N</string>
+    <string name="lon_hint">045°03’05”E</string>
+    <string name="set_gps">установить по gps</string>
+    <string name="spectr">спектр</string>
+    <string name="type">классификация</string>
+    <string name="distance">расстояние</string>
+    <string name="load">загрузка…</string>
+    <string name="from_gc_astrocupol">from\nGC astrocupol</string>
+    <string name="star_way">Star Way</string>
 </resources>

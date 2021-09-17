@@ -2,24 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="400dp"
-    android:orientation="vertical"
-    android:layout_weight="2">
-<ImageView
-    android:id="@+id/imageOfNews"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
     android:layout_weight="2"
-    android:scaleType="centerCrop"/>
-    <TextView
-        android:id="@+id/textOfNews"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageOfNews"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="16dp"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/font"
-        android:lineSpacingExtra="3sp"
-        android:translationY="-1.28sp"
+        android:layout_weight="2"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/textOfNews"
         style="@style/secondary_t"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/regular"
+        android:lineSpacingExtra="3sp"
+        android:padding="16dp"
+        android:text="Частные космические компании грозят обложить налогом в США..."
+        android:translationY="-1.28sp" />
 </LinearLayout>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/screen_launch"
+    tools:context=".GpsFragment">
+
+    <View
+        android:id="@+id/settings_left_button"
+        android:layout_width="12dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gps_title"
+        style="@style/news_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/semibold"
+        android:text="@string/gps"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cur"
+        style="@style/settings_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/medium"
+        android:text="@string/current_gps"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gps_title" />
+
+    <TextView
+        android:id="@+id/lat_text"
+        style="@style/settings_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/medium"
+        android:text="@string/lat"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cur" />
+
+    <TextView
+        android:id="@+id/lon_text"
+        style="@style/settings_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/medium"
+        android:text="@string/lon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lat_text" />
+
+    <EditText
+        android:id="@+id/lat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/edit_text_border"
+        android:fontFamily="@font/regular"
+        android:hint="@string/lat_hint"
+        android:padding="8dp"
+        android:textColorHint="@color/hint"
+        app:layout_constraintLeft_toRightOf="@id/lat_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cur" />
+
+    <EditText
+        android:id="@+id/lon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/edit_text_border"
+        android:fontFamily="@font/regular"
+        android:hint="@string/lon_hint"
+        android:padding="8dp"
+        android:textColorHint="@color/hint"
+        app:layout_constraintLeft_toRightOf="@id/lat_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lat" />
+
+    <Button
+        style="@style/gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/button_back"
+        android:fontFamily="@font/medium"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:text="@string/set_gps"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lon" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,17 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/screen_launch">
+
     <View
         android:id="@+id/logo"
         android:layout_width="168dp"
         android:layout_height="168dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="171dp"
         android:background="@drawable/logo"
+        app:layout_constraintBottom_toTopOf="@id/from_gc_ast"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/from_gc_ast"
+        style="from_gc_ast"
+        android:layout_width="173dp"
+        android:layout_height="52dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="66dp"
+        android:fontFamily="@font/medium"
+        android:gravity="center_horizontal|top"
+        android:text="@string/from_gc_astrocupol"
+        android:textColor="#0B0642"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

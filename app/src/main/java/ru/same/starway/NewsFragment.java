@@ -24,11 +24,12 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.news_layout, container, false);
         news.add(new News("Частные космические компании грозят обложить налогом в США...",
                 R.drawable.news1));
-        news.add(new News("Астрономы выяснили, может ли Солнце поглотить Землю...", R.drawable.news2));
+        news.add(new News("Астрономы выяснили, может ли Солнце поглотить Землю...",
+                R.drawable.news2));
         news.add(new News("Россия отправила в космос один из самых больших модулей МКС",
                 R.drawable.news3));
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
-        NewsAdapter adapter = new NewsAdapter(view.getContext(),news);
+        NewsAdapter adapter = new NewsAdapter(view.getContext(), news);
         recyclerView.setAdapter(adapter);
         return view;
 
