@@ -11,7 +11,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 public class MainActivity extends AppCompatActivity {
-
+    private MyAdapter adapter;
+    ViewPager2 viewPager;
     @Override
     protected void onResume() {
         super.onResume();
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LOW_PROFILE
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        adapter.notifyDataSetChanged();
+        viewPager.setAdapter(adapter);
     }
 
     @Override
@@ -39,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LOW_PROFILE
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        MyAdapter adapter = new MyAdapter(this);
+        adapter = new MyAdapter(this);
 
-        ViewPager2 viewPager = findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }

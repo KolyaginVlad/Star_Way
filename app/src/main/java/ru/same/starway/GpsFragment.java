@@ -1,11 +1,22 @@
 package ru.same.starway;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import ru.same.starway.api.PostWeather;
 
 
 public class GpsFragment extends Fragment {
@@ -21,6 +32,45 @@ public class GpsFragment extends Fragment {
                     .beginTransaction()
                     .replace(R.id.fragmentContainerView, new SettingsFragment())
                     .commit();
+        });
+        TextView lat = view.findViewById(R.id.lat);
+        TextView lon = view.findViewById(R.id.lon);
+        SharedPreferences preferences = getActivity().getSharedPreferences(Constants.name.name(), Context.MODE_PRIVATE);
+        lat.setText(preferences.getString(Constants.gpsLat.name(), ""));
+        lon.setText(preferences.getString(Constants.gpsLon.name(), ""));
+        Button getGpsButton = view.findViewById(R.id.gpsButton);
+        getGpsButton.setOnClickListener(v -> {
+            preferences.edit()
+                    .putString(Constants.gpsLat.name(), lat.getText().toString())
+                    .putString(Constants.gpsLon.name(), lon.getText().toString())
+                    .apply();
+            App.getApi().getData(lat.getText().toString(), lon.getText().toString(),
+                    App.getUNITS(), App.getLANG(), App.getKEY()
+            ).enqueue(new Callback<PostWeather>() {
+                @Override
+                public void onResponse(@NonNull Call<PostWeather> call, @NonNull Response<PostWeather> response) {
+                    if (response.body() != null) {
+                        preferences.edit()
+                                .putString(Constants.location.name(), response.body().getName())
+                                .apply();
+                        Log.e("response.body()", response.body().getName());
+                    }
+                    Log.e("response.body()", "null");
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainerView, new SettingsFragment())
+                            .commit();
+                }
+
+                @Override
+                public void onFailure(Call<PostWeather> call, Throwable t) {
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainerView, new SettingsFragment())
+                            .commit();
+                    Log.e("response.body()", "null:Failure");
+                }
+            });
         });
         return view;
     }

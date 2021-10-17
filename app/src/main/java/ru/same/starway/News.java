@@ -2,11 +2,11 @@ package ru.same.starway;
 
 public class News {
     String text;
-    int imageId;
+    String imageUrl;
 
-    public News(String text, int imageId) {
+    public News(String text, String imageUrl) {
         this.text = text;
-        this.imageId = imageId;
+        this.imageUrl = imageUrl;
     }
 
     public String getText() {
@@ -17,11 +17,11 @@ public class News {
         this.text = text;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

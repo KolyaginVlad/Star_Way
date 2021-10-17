@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:fontFamily="@font/semibold"
+        android:fontFamily="@font/semiboldttf"
         android:text="@string/settings"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"

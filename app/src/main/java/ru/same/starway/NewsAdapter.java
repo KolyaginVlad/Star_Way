@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -71,7 +71,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             NewsHolder newsHolder = (NewsHolder) holder;
             News n = news.get(position - 1);
             newsHolder.title.setText(n.getText());
-            newsHolder.image.setImageResource(n.imageId);
+            newsHolder.image.loadUrl(n.imageUrl);
         }
 
     }
@@ -83,7 +83,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     public static class NewsHolder extends RecyclerView.ViewHolder {
-        final ImageView image;
+        final WebView image;
         final TextView title;
 
         NewsHolder(View view) {
