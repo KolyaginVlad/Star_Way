@@ -24,8 +24,8 @@
     <string name="current_gps">текущее местоположение</string>
     <string name="lat">широта</string>
     <string name="lon">долгота</string>
-    <string name="lat_hint">41°16’59”N</string>
-    <string name="lon_hint">045°03’05”E</string>
+    <string name="lat_hint">41.0000</string>
+    <string name="lon_hint">53.2134</string>
     <string name="set_gps">установить по gps</string>
     <string name="spectr">спектр</string>
     <string name="type">классификация</string>
