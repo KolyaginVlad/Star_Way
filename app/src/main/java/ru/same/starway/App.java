@@ -1,14 +1,6 @@
 package ru.same.starway;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
-
-import com.kwabenaberko.newsapilib.NewsApiClient;
-import com.kwabenaberko.newsapilib.models.request.EverythingRequest;
-import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest;
-import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -18,6 +10,8 @@ public class App extends Application {
     private static final String KEY = "87af9e430e18ed3d99612325416fd8bd";
     private static final String LANG = "ru";
     private static Api api;
+    private static SunApi sunApi;
+
     private Retrofit retrofit;
 
     public static String getLANG() {
@@ -36,6 +30,10 @@ public class App extends Application {
         return api;
     }
 
+    public static SunApi getSunApi() {
+        return sunApi;
+    }
+
 
     @Override
     public void onCreate() {
@@ -45,6 +43,13 @@ public class App extends Application {
                 .addConverterFactory(GsonConverterFactory.create())//добавляем конвертор
                 .build();
         api = retrofit.create(Api.class);
+
+        retrofit =
+                new Retrofit.Builder().baseUrl("https://api.sunrise-sunset.org/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+        sunApi = retrofit.create(SunApi.class);
+
 
     }
 

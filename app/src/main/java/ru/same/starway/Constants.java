@@ -6,5 +6,6 @@ public enum Constants {
     name,
     gpsLat,
     gpsLon,
-    location
+    location,
+    StarWay
 }
