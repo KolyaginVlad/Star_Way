@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +21,7 @@ import androidx.core.content.res.ResourcesCompat;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 class MySubsamplingScaleImageView extends SubsamplingScaleImageView {
 
@@ -31,6 +33,7 @@ class MySubsamplingScaleImageView extends SubsamplingScaleImageView {
 
     ArrayList<MapPin> mapPins;
     ArrayList<DrawPin> drawnPins;
+    Set<MapText> mapTexts;
     Context context;
     private Activity mActivity;
 
@@ -50,6 +53,10 @@ class MySubsamplingScaleImageView extends SubsamplingScaleImageView {
         this.mapPins = mapPins;
         initialise();
         invalidate();
+    }
+
+    public void setMapTexts(Set<MapText> mapTexts) {
+        this.mapTexts = mapTexts;
     }
 
     private void initialise() {
@@ -140,6 +147,12 @@ class MySubsamplingScaleImageView extends SubsamplingScaleImageView {
                     vY + (bmpPin.getHeight() / 2), paint);
             canvas.drawText("туманность", vX + (bmpPin.getWidth() / 2),
                     vY + (bmpPin.getHeight() / 2) + 60 * getScale(), paint);
+            for (MapText text :
+                    mapTexts) {
+                PointF vText = sourceToViewCoord(new PointF(text.getX(), text.getY()));
+                canvas.drawText(text.getText(), vText.x,
+                        vText.y, paint);
+            }
             //add added pin to an Array list to get touched pin
             DrawPin dPin = new DrawPin();
             dPin.setStartX(mPin.getX() - w / 2);
@@ -152,7 +165,8 @@ class MySubsamplingScaleImageView extends SubsamplingScaleImageView {
         setTouchListener();
         onDrawListener.onDraw();
     }
-
+    private float x = 0;
+    private float y = 0;
     private void setTouchListener() {
         final GestureDetector gestureDetector =
                 new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
@@ -196,15 +210,43 @@ class MySubsamplingScaleImageView extends SubsamplingScaleImageView {
                                 onTouchPin.onTouchOutsidePin();
                                 focused = true;
                             }
+                            for (MapText text : mapTexts) {
+                                PointF textCoordinate =
+                                        sourceToViewCoord(new PointF(text.getX(),
+                                                text.getY()));
+                                int textX =
+                                        (int) (textCoordinate.x);
+                                int textY =
+                                        (int) (textCoordinate.y);
+
+                                if (tappedCoordinate.x >= textX && tappedCoordinate.x <= textX + text.getText().length() *getScale()* 90 &&
+                                        tappedCoordinate.y >= textY - 180 * getScale() && tappedCoordinate.y <= textY ) {
+                                    animateScaleAndCenter(1f, new PointF(text.getX(), text.getY()))
+                                            .start();
+                                    onTouchPin.onTouchText(text.getText());
+                                    return true;
+                                }
+                                onTouchPin.onTouchOutsidePin();
+                                focused = true;
+                            }
                         }
                         return true;
                     }
                 });
-
         setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                PointF pointF =  viewToSourceCoord(motionEvent.getX(), motionEvent.getY());
+                x = pointF.x;
+                y = pointF.y;
                 return gestureDetector.onTouchEvent(motionEvent);
+            }
+        });
+        setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                onTouchPin.onLongClick(x, y);
+                return false;
             }
         });
     }

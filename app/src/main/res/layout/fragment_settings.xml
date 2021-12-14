@@ -47,99 +47,93 @@
         android:paddingEnd="8dp"
         android:paddingBottom="8dp"
         android:textColorHint="@color/hint"
+        android:textColor="@color/white"
+        android:singleLine="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings" />
 
-    <TextView
-        android:id="@+id/watch"
-        style="@style/settings_style"
+    <LinearLayout
+        android:id="@+id/settings_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/medium"
-        android:text="@string/sky_watch"
-        app:drawableEndCompat="@drawable/right"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_field" />
+        app:layout_constraintTop_toBottomOf="@id/search_field">
 
-    <TextView
-        android:id="@+id/space"
-        style="@style/settings_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/medium"
-        android:text="@string/space"
-        app:drawableEndCompat="@drawable/right"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/watch" />
+        <TextView
+            android:id="@+id/watch"
+            style="@style/settings_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/medium"
+            android:text="@string/sky_watch"
+            app:drawableEndCompat="@drawable/right" />
 
-    <TextView
-        android:id="@+id/units"
-        style="@style/settings_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/medium"
-        android:text="@string/units"
-        app:drawableEndCompat="@drawable/right"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/space" />
+        <TextView
+            android:id="@+id/space"
+            style="@style/settings_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/medium"
+            android:text="@string/space"
+            app:drawableEndCompat="@drawable/right" />
 
-    <TextView
-        android:id="@+id/gps"
-        style="@style/settings_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/medium"
-        android:text="@string/gps"
-        app:drawableEndCompat="@drawable/right"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/units" />
+        <TextView
+            android:id="@+id/units"
+            style="@style/settings_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/medium"
+            android:text="@string/units"
+            app:drawableEndCompat="@drawable/right" />
 
-    <TextView
-        android:id="@+id/notifications"
-        style="@style/settings_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/medium"
-        android:text="@string/notifications"
-        app:drawableEndCompat="@drawable/right"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gps" />
+        <TextView
+            android:id="@+id/gps"
+            style="@style/settings_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/medium"
+            android:text="@string/gps"
+            app:drawableEndCompat="@drawable/right" />
 
-    <TextView
-        android:id="@+id/help"
-        style="@style/settings_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/medium"
-        android:text="@string/help"
-        app:drawableEndCompat="@drawable/right"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/notifications" />
+        <TextView
+            android:id="@+id/notifications"
+            style="@style/settings_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/medium"
+            android:text="@string/notifications"
+            app:drawableEndCompat="@drawable/right" />
+
+        <TextView
+            android:id="@+id/help"
+            style="@style/settings_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/medium"
+            android:text="@string/help"
+            app:drawableEndCompat="@drawable/right" />
+    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"

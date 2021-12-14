@@ -89,7 +89,7 @@ public class GpsFragment extends Fragment {
         alarmManager.cancel(pendingIntent);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
                 5000,
-                24*1000*60*60,
+                24*60*60*1000,
                 pendingIntent);
         getActivity().getSupportFragmentManager()
                 .beginTransaction()

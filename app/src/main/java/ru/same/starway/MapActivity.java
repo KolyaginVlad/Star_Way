@@ -1,16 +1,22 @@
 package ru.same.starway;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
@@ -20,6 +26,8 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class MapActivity extends AppCompatActivity implements OnDrawListener, OnTouchPin {
@@ -74,9 +82,21 @@ public class MapActivity extends AppCompatActivity implements OnDrawListener, On
         imageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP);
         imageView.setMaxScale(1.2f);
         y = imageView.getY();
-        ArrayList<MapPin> mapPins = new ArrayList();
+        ArrayList<MapPin> mapPins = new ArrayList<>();
         mapPins.add(new MapPin(4050f, 5250f, 1));
         imageView.setPins(mapPins);
+        Set<String> texts =
+                getSharedPreferences(Constants.name.name(), MODE_PRIVATE).getStringSet(Constants.texts
+                        .name(), new HashSet<>());
+        Set<MapText> mapTexts = new HashSet<>();
+        for (String s: texts
+             ) {
+            String [] parts = s.split("\n");
+            String [] pos = parts[0].split("/");
+            mapTexts.add(new MapText(Float.parseFloat(pos[0]), Float.parseFloat(pos[1]),
+                    parts[1]));
+        }
+        imageView.setMapTexts(mapTexts);
         imageView.setOnDrawListener(this);
         imageView.setOnTouchPinListener(this);
         MyArrayAdapter adapter = new MyArrayAdapter(getApplicationContext(),
@@ -173,6 +193,7 @@ public class MapActivity extends AppCompatActivity implements OnDrawListener, On
 
     @Override
     public void onTouchPin(int id) {
+        bottomSheetBehaviour.setDraggable(true);
         if (id == 1) {
             ((TextView) findViewById(R.id.title)).setText("крабовидная туманность");
         }
@@ -187,6 +208,55 @@ public class MapActivity extends AppCompatActivity implements OnDrawListener, On
         bottomSheetBehaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
         imageView.setY(y);
 
+    }
+
+    @Override
+    public void onTouchText(String text) {
+        ((TextView) findViewById(R.id.title)).setText(text);
+        bottomSheetBehaviour.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        bottomSheetBehaviour.setDraggable(false);
+    }
+
+    @Override
+    public void onLongClick(float x, float y) {
+        LayoutInflater li = LayoutInflater.from(this);
+        View promptsView = li.inflate(R.layout.dialog, null);
+        AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this);
+        mDialogBuilder.setView(promptsView);
+        EditText userInput =  promptsView.findViewById(R.id.input_text);
+        mDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            @SuppressLint("MutatingSharedPrefs")
+                            public void onClick(DialogInterface dialog, int id) {
+                                SharedPreferences pref =
+                                        getSharedPreferences(Constants.name.name(), MODE_PRIVATE);
+                                Set<String> texts =
+                                       pref.getStringSet(Constants.texts
+                                                .name(), new HashSet<>());
+                                texts.add(x+"/"+y+"\n"+userInput.getText());
+                                pref.edit().putStringSet(Constants.texts
+                                        .name(), texts).apply();
+                                Set<MapText> mapTexts = new HashSet<>();
+                                for (String s: texts
+                                ) {
+                                    String [] parts = s.split("\n");
+                                    String [] pos = parts[0].split("/");
+                                    mapTexts.add(new MapText(Float.parseFloat(pos[0]), Float.parseFloat(pos[1]),
+                                            parts[1]));
+                                }
+                                imageView.setMapTexts(mapTexts);
+                            }
+                        })
+                .setNegativeButton("Отмена",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alertDialog = mDialogBuilder.create();
+        alertDialog.show();
     }
 
     @Override
